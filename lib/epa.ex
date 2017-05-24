@@ -18,6 +18,8 @@ defmodule EPA do
   Takes a list of ENV Var names (Strings), gets the ENV vars out of the
   environment, strips leading and trailing whitespaces from the values, and
   checks that all values are non-empty strings.
+
+  Optionally takes an atom specifying the environment these vars are required in.
   """
   @spec required([var_name])
   :: true | no_return
