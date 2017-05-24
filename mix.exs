@@ -9,6 +9,15 @@ defmodule Epa.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps(),
      name: "EPA",
+     package: [
+       description: "Simple helpers to validate your ENV config is correct",
+       licenses: ["MIT"],
+       maintainers: ["cjpoll@gmail.com"],
+       links: %{
+         home: "https://github.com/cjpoll/epa",
+         source: "https://github.com/cjpoll/epa"
+       }
+     ],
      source_url: "https://github.com/cjpoll/epa",
      homepage_url: "https://github.com/cjpoll/epa",
      docs: [main: "EPA",
