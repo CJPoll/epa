@@ -4,8 +4,6 @@
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
   1. Add `epa` to your list of dependencies in `mix.exs`:
 
     ```elixir
@@ -14,11 +12,38 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     end
     ```
 
-  2. Ensure `epa` is started before your application:
+## Usage
 
-    ```elixir
-    def application do
-      [applications: [:epa]]
-    end
-    ```
+In your Application's start/2 function, simply do:
 
+```elixir
+defmodule MyApp do
+  import EPA
+
+  def start(_, _) do
+    required(["ENV_VAR_1", "API_KEY_THING"])
+  end
+end
+```
+
+Now the app will raise an exception on boot if the env vars aren't correctly
+set!
+
+Optionally, you can set which env the check is for:
+
+```elixir
+defmodule MyApp do
+  import EPA
+
+  def start(_, _) do
+    required(["ENV_VAR_1", "API_KEY_THING"], :dev)
+    required(["ENV_VAR_2", "API_KEY_THING"], :prod)
+  end
+end
+```
+
+### What going on?
+
+&EPA.required/1-2 gets the value out with System.get_env, stripping leading or
+trailing whitespace. If the value is nil or "" (after stripping), then an
+exception is raised telling you which env vars are missing.
