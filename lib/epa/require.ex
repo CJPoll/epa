@@ -1,4 +1,6 @@
 defmodule EPA.Require do
+  @typep maybe(t) :: t | nil
+
   @spec required([{EPA.var_name, EPA.var_value}])
   :: true | no_return
   def required(vars) do
@@ -22,7 +24,7 @@ defmodule EPA.Require do
     true
   end
 
-  @spec strip(EPA.maybe(EPA.var_value)) :: EPA.maybe(EPA.var_value)
+  @spec strip(maybe(EPA.var_value)) :: maybe(EPA.var_value)
   def strip(nil), do: nil
   def strip(str) do
     str

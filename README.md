@@ -1,7 +1,5 @@
 # Epa
 
-**TODO: Add description**
-
 ## Installation
 
   1. Add `epa` to your list of dependencies in `mix.exs`:

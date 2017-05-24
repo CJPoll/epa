@@ -12,15 +12,8 @@ defmodule EPA do
 
   @type var_name :: String.t
   @type var_value :: String.t
-  @type maybe(t) :: t | nil
+  @type environment :: atom
 
-  @doc ~S"""
-  Takes a list of ENV Var names (Strings), gets the ENV vars out of the
-  environment, strips leading and trailing whitespaces from the values, and
-  checks that all values are non-empty strings.
-
-  Optionally takes an atom specifying the environment these vars are required in.
-  """
   @spec required([var_name])
   :: true | no_return
   def required(expected_vars) do
@@ -29,6 +22,17 @@ defmodule EPA do
     |> EPA.Require.required
   end
 
+  @doc ~S"""
+  Does 3 things:
+    1. Gets the ENV vars out of the environment
+    1. Strips leading and trailing whitespaces from the values
+    1. Checks that all values are non-nil, non-empty strings.
+    1. Raises an exception on failure
+
+  Optionally takes an atom specifying the environment these vars are required in.
+  """
+  @spec required([var_name], environment)
+  :: true | no_return
   def required(expected_vars, env) when is_atom(env) and is_list(expected_vars) do
     if Mix.env == env do
       required(expected_vars)
