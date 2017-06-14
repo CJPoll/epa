@@ -10,11 +10,10 @@ defmodule EPA do
     end
   end
 
-  @type var_name :: String.t
-  @type var_value :: String.t
+  @type env_var :: String.t
   @type environment :: atom
 
-  @spec required([var_name])
+  @spec required([env_var])
   :: true | no_return
   def required(expected_vars) do
     expected_vars
@@ -31,7 +30,7 @@ defmodule EPA do
 
   Optionally takes an atom specifying the environment these vars are required in.
   """
-  @spec required([var_name], environment)
+  @spec required([env_var], environment)
   :: true | no_return
   def required(expected_vars, env) when is_atom(env) and is_list(expected_vars) do
     if Mix.env == env do
