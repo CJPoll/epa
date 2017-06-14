@@ -23,7 +23,7 @@ defmodule EPA do
   end
 
   @doc ~S"""
-  Does 3 things:
+  Does a few things things:
     1. Gets the ENV vars out of the environment
     1. Strips leading and trailing whitespaces from the values
     1. Checks that all values are non-nil, non-empty strings.
