@@ -6,7 +6,7 @@
 
     ```elixir
     def deps do
-      [{:epa, "~> 0.1.0"}]
+      [{:epa, "~> 0.1.1"}]
     end
     ```
 
