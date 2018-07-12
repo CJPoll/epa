@@ -22,19 +22,23 @@ defmodule EPA do
   end
 
   @doc ~S"""
-  Does a few things things:
+  Does a few things:
     1. Gets the ENV vars out of the environment
     1. Strips leading and trailing whitespaces from the values
     1. Checks that all values are non-nil, non-empty strings.
     1. Raises an exception on failure
 
-  Optionally takes an atom specifying the environment these vars are required in.
+  Optionally takes an atom or list of atoms specifying the environment these vars are required in.
   """
   @spec required([env_var], environment)
   :: true | no_return
-  def required(expected_vars, env) when is_atom(env) and is_list(expected_vars) do
-    if Mix.env == env do
+  def required(expected_vars, env) when is_list(expected_vars) and (is_list(env) or is_atom(env)) do
+    if required_for_env?(env) do
       required(expected_vars)
     end
   end
+
+  @spec required_for_env?(atom | [atom]) :: boolean
+  defp required_for_env?(env) when is_atom(env), do: Mix.env == env
+  defp required_for_env?(env) when is_list(env), do: Enum.member?(env, Mix.env)
 end

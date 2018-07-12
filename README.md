@@ -34,7 +34,7 @@ defmodule MyApp do
   import EPA
 
   def start(_, _) do
-    required(["ENV_VAR_1", "API_KEY_THING"], :dev)
+    required(["ENV_VAR_1", "API_KEY_THING"], [:dev, :test])
     required(["ENV_VAR_2", "API_KEY_THING"], :prod)
   end
 end
