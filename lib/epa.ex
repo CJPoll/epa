@@ -32,7 +32,7 @@ defmodule EPA do
   """
   @spec required([env_var], environment)
   :: true | no_return
-  def required(expected_vars, env) when is_list(expected_vars) do
+  def required(expected_vars, env) when is_list(expected_vars) and (is_list(env) or is_atom(env)) do
     if required_for_env?(env) do
       required(expected_vars)
     end
